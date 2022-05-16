@@ -1,0 +1,30 @@
+version: "3"
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8080:80"
+    networks:
+      - wordpress-network
+    volumes:
+      - wordpress-vol:/var/www/html
+    env_file:
+      - wordpress.env
+
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - wordpress-network
+    volumes:
+      - mysql-vol:/var/lib/mysql
+    env_file:
+      - mysql.env
+
+volumes:
+  wordpress-vol:
+  mysql-vol:
+
+networks:
+  wordpress-network: {}
